@@ -1,4 +1,4 @@
-def github_id = 'CHANGEME'
+def github_id = 'stevescorfield'
 
 def namespace = github_id.toLowerCase()
 def image_name = "onsetraining/${namespace}-customer-service"
