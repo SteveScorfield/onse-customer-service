@@ -61,7 +61,6 @@ def test_create_customer(create_customer, web_client, customer_repository):
         surname='Humble',
         customerId='None')  # ID isNone because call is mocked
 
-
 @pytest.mark.parametrize(
     'bad_payload',
     [dict(),
@@ -77,3 +76,17 @@ def test_create_customer_with_bad_context_type(web_client):
     response = web_client.post('/customers/', data='not json')
     assert response.status_code == 415
     assert response.get_json()['message'] == 'Request must be application/json'
+
+
+@patch('customer_service.model.commands.update_customer')
+def test_update_customer(update_customer, web_client, customer_repository):
+    response = web_client.put('/customers/12345', json=dict(firstName='Bob', surname='Doe'))
+
+    update_customer.assert_called_with(
+        12345,
+        customer_repository,
+        'Bob',
+        'Doe')
+
+    assert response.status_code == 200, \
+        f'Expected 200, got {response.status_code} - {response.get_json()}'
