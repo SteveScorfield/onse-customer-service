@@ -42,7 +42,7 @@ def create_customer():
 
     # Do the thing
     customer = Customer(first_name=body['firstName'], surname=body['surname'])
-    
+
     commands.create_customer(
         customer=(customer),
         customer_repository=customer_repository)
@@ -61,7 +61,10 @@ def update_customer(customer_id):
     body = request.get_json()
 
     # Do the thing
-    commands.update_customer(int(customer_id), customer_repository, body['firstName'], body['surname'])
+    commands.update_customer(int(customer_id),
+                             customer_repository,
+                             body['firstName'],
+                             body['surname'])
 
     # commands.update_customer(
     #     customer_id=customer

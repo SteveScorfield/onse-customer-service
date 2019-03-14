@@ -1,5 +1,3 @@
-from builtins import NotImplementedError
-
 from behave import when, then
 
 
@@ -22,5 +20,5 @@ def assert_name_change(context, cust_id, cust_name):
         f'Status code = {response.status_code}; expected 200'
     customer = response.get_json()
     returned_name = f"{customer['firstName']} {customer['surname']}"
-    assert  returned_name == cust_name, \
+    assert returned_name == cust_name, \
         f'Expected customer name {cust_name} but {returned_name} instead'
